@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.DemoProject.Entity.Address;
+import com.example.DemoProject.Exception.ResourceNotFoundException;
 import com.example.DemoProject.Repository.AddressRepo;
 
 @Service
@@ -19,14 +20,14 @@ public class AddressServiceImpl implements AddressService {
 
 	@Override
 	public Address updateAddress(Address adr, Long userId) {
-		Address updated = adRepo.findById(userId).get();
+		Address updated = adRepo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User","UserId",userId));
 		updated = adRepo.save(adr);
 		return updated;
 	}
 
 	@Override
 	public Address getAddressById(Long userId) {
-		return adRepo.findById(userId).get();
+		return adRepo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User","UserId",userId));
 	}
 
 }

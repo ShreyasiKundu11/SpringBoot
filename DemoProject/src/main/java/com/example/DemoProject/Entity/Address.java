@@ -43,8 +43,6 @@ public class Address {
 	}
 
 	public Address() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Address(Long userId, String address, User user) {
